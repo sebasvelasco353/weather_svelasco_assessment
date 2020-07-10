@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 // Components
 import Searchbox from '../../components/Searchbox/Searchbox'
+import Forecast from '../../components/Forecast/Forecast';
 
 const StyledHome_page = styled.div`
     padding: 50px 50px;
@@ -40,7 +41,7 @@ export default class Home extends Component {
         return (
             <StyledHome_page>
                 <Searchbox type="text" value={this.state.city} handleChange={this.handleSearchboxChange.bind(this)} onSearch={this.searchWeather.bind(this)}/>
-
+                <Forecast data={this.state.cityWeather ? this.state.cityWeather : {}} />
             </StyledHome_page>
         )
     }
