@@ -50,9 +50,16 @@ export default class Home extends Component {
         console.log("holi");
         this.searchWeather();
     }
+    capitalizeSearch = (str) => {
+        if(typeof str === 'string') {
+            return str.replace(/^\w/, c => c.toUpperCase());
+        } else {
+            return '';
+        }
+    };
     searchWeather(){
         if (this.state.city !== "" && this.state.city !== null && this.state.city !== undefined) {
-            fetch(`http://api.openweathermap.org/data/2.5/weather?q=${this.state.city}&units=metric&APPID=71fddc04d2f1bb3ccf0749934ed9b816`)
+            fetch(`http://api.openweathermap.org/data/2.5/weather?q=${this.capitalizeSearch(this.state.city)}&units=metric&APPID=71fddc04d2f1bb3ccf0749934ed9b816`)
             .then(res => res.json())
             .then((data) => {
                 console.log(data);
@@ -61,7 +68,7 @@ export default class Home extends Component {
                 });
             }).catch(console.log);
         } else {
-            alert("Check the search input");
+            alert("Porfavor ingresa una ciudad");
         }
     }
     handleSearchboxChange(e){
