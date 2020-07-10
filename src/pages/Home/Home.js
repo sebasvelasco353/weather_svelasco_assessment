@@ -6,13 +6,43 @@ import Forecast from '../../components/Forecast/Forecast';
 
 const StyledHome_page = styled.div`
     padding: 50px 50px;
+    .dayWeather{
+        margin: 0rem auto;
+        width: 60%;
+        height: 40vh;
+        display: flex;
+        flex-direction: column;
+        font-weight: bold;
+        .imgPlaceholder{
+            height: 30vh;
+            background-color: gray;
+        }
+        p{
+            border-top: solid 3px gray;
+            margin-top: 20px;
+            padding-top: 20px;
+            text-align: center;
+            .temp_max{
+                padding: 0.5rem 1.5rem;
+                margin: 0.5rem;
+                background-color: rgb(72, 149, 185);
+                color: white;
+            }
+            .temp_min{
+                padding: 0.5rem 1.5rem;
+                margin: 0.5rem;
+                background-color: black;
+                color: white;
+            }
+        }
+    }
 `;
 
 export default class Home extends Component {
     constructor(props){
         super(props);
         this.state = {
-            city: "e",
+            city: "London",
             cityWeather: null
         }
     }
@@ -41,7 +71,20 @@ export default class Home extends Component {
         return (
             <StyledHome_page>
                 <Searchbox type="text" value={this.state.city} handleChange={this.handleSearchboxChange.bind(this)} onSearch={this.searchWeather.bind(this)}/>
-                <Forecast data={this.state.cityWeather ? this.state.cityWeather : {}} />
+                {this.state.cityWeather ? (
+                    <div className="dayWeather">
+                        <div className="imgPlaceholder">
+                            img placeholder
+                        </div>
+                        <p>
+                            <b>{this.state.cityWeather.weather[0].description}</b> 
+                            <span className="temp_max">{this.state.cityWeather.main.temp_max + " °C."}</span> 
+                            <span className="temp_min">{this.state.cityWeather.main.temp_min + " °C."}</span> 
+                            <span className="humedad"> Humedad: {this.state.cityWeather.main.humidity}%</span> | 
+                            <span className="vientos"> Vientos: {this.state.cityWeather.wind.speed}m/s</span>
+                        </p>
+                    </div>
+                ) : null}
             </StyledHome_page>
         )
     }
