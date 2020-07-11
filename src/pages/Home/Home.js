@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Searchbox from '../../components/Searchbox/Searchbox'
 import Forecast from '../../components/Forecast/Forecast';
 
-const StyledHome_page = styled.div`
+const StyledHome = styled.div`
     padding: 50px 50px;
     .dayWeather{
         margin: 0rem auto;
@@ -42,7 +42,7 @@ export default class Home extends Component {
     constructor(props){
         super(props);
         this.state = {
-            city: "London",
+            city: "Bogota",
             cityWeather: null
         }
     }
@@ -70,13 +70,13 @@ export default class Home extends Component {
         } else {
             alert("Porfavor ingresa una ciudad");
         }
-    }
+    };
     handleSearchboxChange(e){
         this.setState({ city: e.target.value });
-    }
+    };
     render() {
         return (
-            <StyledHome_page>
+            <StyledHome>
                 <Searchbox type="text" value={this.state.city} handleChange={this.handleSearchboxChange.bind(this)} onSearch={this.searchWeather.bind(this)}/>
                 {this.state.cityWeather ? (
                     <div className="dayWeather">
@@ -92,7 +92,7 @@ export default class Home extends Component {
                         </p>
                     </div>
                 ) : null}
-            </StyledHome_page>
+            </StyledHome>
         )
     }
 }

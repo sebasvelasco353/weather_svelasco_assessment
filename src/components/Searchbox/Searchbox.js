@@ -14,15 +14,12 @@ const StyledSearch = styled.div`
 `;
 
 export default class Searchbox extends Component {
-    constructor(props){
-        super(props);
-    }
     render() {
         return (
             <StyledSearch>
                 <h3>Busqueda por ciudad.</h3>
                 <div className="search">
-                    <input onChange={(e) => this.props.handleChange(e)} />
+                    <input onChange={(e) => this.props.handleChange(e)} placeholder={this.props.value} value={this.props.value} />
                     <button onClick={() => this.props.onSearch()}><img src="https://img.icons8.com/material-rounded/24/000000/search.png"/></button>
                 </div>
             </StyledSearch>
