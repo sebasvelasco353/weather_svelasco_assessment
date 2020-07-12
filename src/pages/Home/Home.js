@@ -3,6 +3,11 @@ import styled from 'styled-components'
 // Components
 import Searchbox from '../../components/Searchbox/Searchbox'
 import Forecast from '../../components/Forecast/Forecast';
+// img
+import clouds from '../../assets/img/cloud.svg'
+import water from '../../assets/img/water.svg'
+import drizzle from '../../assets/img/weather.svg'
+import sun from '../../assets/img/sun.svg'
 
 const StyledHome = styled.div`
     padding: 50px 50px;
@@ -15,7 +20,10 @@ const StyledHome = styled.div`
         font-weight: bold;
         .imgPlaceholder{
             height: 30vh;
-            background-color: gray;
+            background-color: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         p{
             border-top: solid 3px gray;
@@ -74,6 +82,18 @@ export default class Home extends Component {
     handleSearchboxChange(e){
         this.setState({ city: e.target.value });
     };
+    weatherImage(){
+        switch (this.state.cityWeather.weather[0].main) {
+            case "Clouds":
+                return <img style={{ width: '200px' }} src={clouds} alt="Clouds"/>
+            case "Drizzle":
+                return <img style={{ width: '200px' }} src={drizzle} alt="Clouds"/>
+            case "Rain":
+                return <img style={{ width: '200px' }} src={water} alt="Clouds"/>    
+            default:
+                return <img style={{ width: '200px' }} src={sun} alt="Clouds"/>
+        }
+    }
     render() {
         return (
             <StyledHome>
@@ -81,7 +101,8 @@ export default class Home extends Component {
                 {this.state.cityWeather ? (
                     <div className="dayWeather">
                         <div className="imgPlaceholder">
-                            img placeholder
+                            {/* img placeholder */}
+                            {this.weatherImage()}
                         </div>
                         <p>
                             <b>{this.state.cityWeather.weather[0].description}</b> 
@@ -89,6 +110,9 @@ export default class Home extends Component {
                             <span className="temp_min">{this.state.cityWeather.main.temp_min + " °C."}</span> 
                             <span className="humedad"> Humedad: {this.state.cityWeather.main.humidity}%</span> | 
                             <span className="vientos"> Vientos: {this.state.cityWeather.wind.speed}m/s</span>
+                        </p>
+                        <p>
+                            Icons downloaded from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
                         </p>
                     </div>
                 ) : null}
